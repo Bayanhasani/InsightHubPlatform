@@ -9,6 +9,31 @@
     </a>
     {% endif %}
 </div>
+<div class="mb-4">
+    <div class="row g-3">
+        <div class="col-md-8">
+            <!-- Search Form -->
+            <form method="get" class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search jobs, posts..." 
+                       value="{{ search_query }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <!-- Filter by Post Type -->
+            <form method="get" class="input-group">
+                <select name="type" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Types</option>
+                    <option value="job" {% if selected_type == 'job' %}selected{% endif %}>Jobs</option>
+                    <option value="question" {% if selected_type == 'question' %}selected{% endif %}>Questions</option>
+                    <option value="post" {% if selected_type == 'post' %}selected{% endif %}>General Posts</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="row g-4">
     {% for post in posts %}
@@ -59,9 +84,8 @@
     </div>
     {% empty %}
     <div class="col-12">
-        <div class="alert alert-primary d-flex align-items-center">
-            <i class="bi bi-info-circle-fill me-2"></i>
-            <div>No posts yet. Be the first to share!</div>
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No posts found matching your criteria.
         </div>
     </div>
     {% endfor %}

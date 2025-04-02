@@ -8,7 +8,7 @@ def index(request):
     posts = Post.objects.filter(is_published=True).select_related('author').order_by('-created_at')
     
     # Add pagination (10 posts per page)
-    paginator = Paginator(posts, 10)
+    paginator = Paginator(posts, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
