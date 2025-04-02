@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Profile</title>
+</head>
+<body>
+    <h1>{{ company.name }}</h1>
+    <p>{{ company.description }}</p>
+    <p>Email: {{ company.email }}</p>
+    <p>Phone: {{ company.phone }}</p>
+    <p>Address: {{ company.address }}</p>
+    <p>Website: <a href="{{ company.website }}">{{ company.website }}</a></p>
+    {% if company.logo %}
+        <img src="{{ company.logo.url }}" alt="Company Logo">
+    {% endif %}
+    <br><br>
+    <a href="{% url 'company_update' company.id %}">Edit Company</a>
+</body>
+</html>
