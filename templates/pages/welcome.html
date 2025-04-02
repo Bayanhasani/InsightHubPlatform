@@ -4,21 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to InsightHub</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body class="bg-light">
-
-    <div class="container text-center mt-5">
-        <h1 class="mb-3">🚀 Ready to Enhance Your IT Skills?</h1>
-        <p class="lead">Join <strong>InsightHub</strong>, the ultimate platform for IT students to connect, learn, and grow together.</p>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #610036;
+            --primary-light: #8a2a62;
+            --accent-yellow: #ffd43b;
+            --accent-blue: #4dabf7;
+        }
         
-        <div class="mt-4">
-            <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2">Login</a>
-            <a href="{% url 'signup' %}" class="btn btn-success btn-lg">Get Started</a>
+        /* Modern Logo Styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-badge {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(97, 0, 54, 0.3);
+            transition: all 0.3s ease;
+            margin-right: 15px;
+        }
+        
+        .logo-badge:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        .logo-badge::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, 
+                                      rgba(255,255,255,0.8) 0%, 
+                                      rgba(255,255,255,0) 60%);
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white; /* Changed to solid white */
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .logo-text::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-yellow), var(--accent-blue));
+            border-radius: 3px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Hero Section with New Logo -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <div class="logo-container">
+                <div class="logo-badge">
+                    <i class="bi bi-lightbulb-fill logo-icon"></i>
+                </div>
+                <h1 class="logo-text">InsightHub</h1>
+            </div>
+            <p class="lead mb-4">Community for Mutah University</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{% url 'login' %}" class="btn btn-light px-4">Log in</a>
+                <a href="{% url 'signup' %}" class="btn btn-outline-light px-4">Sign Up</a>
+            </div>
         </div>
+    </section>
 
-        <p class="mt-4 text-muted">Empower your future. Build connections. Expand your knowledge.</p>
-    </div>
+    <!-- Rest of your existing content remains the same -->
+    <!-- About Section -->
+    <section class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="mb-4">How InsightHub can help you grow</h2>
+                <p class="lead">Our platform is a dynamic and collaborative community designed exclusively for IT students and alumni at Mutah University. It aims to bridge the gap between academia and the professional world by fostering connections, sharing knowledge, and facilitating career opportunities.</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Features Section -->
+    <section class="container mb-5">
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card card p-4">
+                    <div class="text-center">
+                        <i class="bi bi-briefcase feature-icon"></i>
+                        <h3>Land your dream job</h3>
+                        <p>Connect with alumni who can help prepare for interviews, review your resume, and recommend job opportunities.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card card p-4">
+                    <div class="text-center">
+                        <i class="bi bi-question-circle feature-icon"></i>
+                        <h3>Get help when you need it</h3>
+                        <p>Ask questions and share knowledge with a community of learners and experts.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card card p-4">
+                    <div class="text-center">
+                        <i class="bi bi-people feature-icon"></i>
+                        <h3>Give back to your community</h3>
+                        <p>Become a mentor, answer questions, and help your peers learn through our Q&A forum.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card card p-4">
+                    <div class="text-center">
+                        <i class="bi bi-lightbulb feature-icon"></i>
+                        <h3>Stay updated with tech</h3>
+                        <p>Keep up with industry trends, learn new skills, and discover important tech news.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card card p-4">
+                    <div class="text-center">
+                        <i class="bi bi-code-square feature-icon"></i>
+                        <h3>Collaborate on projects</h3>
+                        <p>Work with other students and professionals on team projects and collaborative learning.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center p-5 bg-light rounded-3">
+                <h2 class="mb-4">Ready to take the next step?</h2>
+                <p class="lead mb-4">Join InsightHub today and start connecting with a community of IT students, alumni, and companies.</p>
+                <a href="{% url 'signup' %}" class="btn btn-primary btn-lg px-4">Sign Up Now</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">© 2023 InsightHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

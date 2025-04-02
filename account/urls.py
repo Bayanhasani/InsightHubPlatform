@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import signup, user_login, user_logout,verify_account
+from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('signup/', signup, name='signup'),
-    path('login/', user_login, name='login'),
-    path('logout/', user_logout, name='logout'),
-    path('verify/', verify_account, name='verify_account'),
+    path('signup/', views.signup, name='signup'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
+    path('verify/', views.verify_account, name='verify_account'),
+        path('verify-email/<str:token>/', views.verify_email, name='verify_email'),
 
 
     # Use Django’s built-in views for password reset

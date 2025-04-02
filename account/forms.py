@@ -9,8 +9,18 @@ class SignupForm(forms.ModelForm):
 
     class Meta:
         model = User  # Ensure it uses your CustomUser model
-        fields = ['username', 'email', 'password', 'user_type']
-    
+        fields = ['username', 'user_type','email', 'password']
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        user_type = cleaned_data.get('user_type')
+
+        if user_type == 'student' and not email.endswith('@mutah.edu.jo'):
+            raise forms.ValidationError(
+                "Students must register with a @mutah.edu.jo email."
+            )
+        return cleaned_data
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])  # Hash password
@@ -18,17 +28,13 @@ class SignupForm(forms.ModelForm):
             user.save()
         return user
     
+    
 
 
 class GraduateVerificationForm(forms.ModelForm):
     class Meta:
         model = Verification
         fields = ['certificate']
-
-class StudentVerificationForm(forms.ModelForm):
-    class Meta:
-        model = Verification
-        fields = ['university_id']
 
 class CompanyVerificationForm(forms.ModelForm):
     class Meta:

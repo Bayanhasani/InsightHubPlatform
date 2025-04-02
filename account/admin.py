@@ -12,6 +12,10 @@ class CustomUserAdmin(admin.ModelAdmin):
             user.save()  # This will update verifications via CustomUser.save()
         self.message_user(request, f"Verified {queryset.count()} users")
     
+    def save_model(self, request, obj, form, change):
+        obj.clean()  # Runs validation, for email verfiying
+        super().save_model(request, obj, form, change)
+
     def unverify_users(self, request, queryset):
         for user in queryset:
             user.is_verified = False
