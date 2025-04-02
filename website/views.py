@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from post.models import Post
 from django.core.paginator import Paginator
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 @login_required(login_url='login')
 def index(request):
     # Get all published posts ordered by newest first
@@ -18,4 +20,5 @@ def index(request):
     })
 def welcome(request):
     return render(request,"pages/welcome.html")
+
 

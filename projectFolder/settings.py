@@ -61,6 +61,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_COOKIE_HTTPONLY = False  # Allows JavaScript to access CSRF token
+CSRF_COOKIE_SECURE = True  # If using HTTPS
+CSRF_COOKIE_SAMESITE = 'Lax'  # Recommended for POST requests across redirects
+
+SESSION_COOKIE_AGE = 3600  # 1 hour session
+SESSION_SAVE_EVERY_REQUEST = True  # Keeps session fresh
+SESSION_COOKIE_SECURE = True  # If using HTTPS
+
 ROOT_URLCONF = 'projectFolder.urls'
 
 TEMPLATES = [
@@ -132,7 +140,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT=os.path.join(BASE_DIR,"static")
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,"projectFolder/static")
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -142,6 +153,8 @@ AUTH_USER_MODEL = 'account.CustomUser'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

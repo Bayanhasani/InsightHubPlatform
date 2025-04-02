@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,151 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- my custom CSS -->
+      <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <title>{% block title %}InsightHub{% endblock %}</title>
-    <style>
-        :root {
-            --primary-color: #610036;
-            --primary-light: #8a2a62;
-            --accent-yellow: #ffd43b;
-            --accent-blue: #4dabf7;
-        }
-        
-        /* Enhanced Logo Styles */
-        .logo-container {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .logo-badge {
-            width: 40px;
-            height: 40px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(97, 0, 54, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .logo-badge:hover {
-            transform: rotate(15deg) scale(1.1);
-        }
-        
-        .logo-badge::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, 
-                                      rgba(255,255,255,0.8) 0%, 
-                                      rgba(255,255,255,0) 60%);
-        }
-        
-        .logo-icon {
-            font-size: 1.5rem;
-            color: white;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            position: relative;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-        
-        .logo-text::after {
-            content: "";
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, var(--accent-yellow), var(--accent-blue));
-            border-radius: 2px;
-        }
-        
-        /* Rest of your existing styles */
-        body {
-            background-color: #f8f9fa;
-        }
-        
-        .navbar {
-            background-color: var(--primary-color) !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .nav-link {
-            font-weight: 500;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-light);
-            border-color: var(--primary-light);
-        }
-        
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .post-card {
-            transition: transform 0.2s;
-            border: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        
-        .job-badge {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .question-badge {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        .dropdown-item:active {
-            background-color: var(--primary-color);
-        }
-        
-        footer {
-            background-color: var(--primary-color);
-            padding: 2rem 0;
-        }
-        
-        .feature-icon {
-            color: var(--primary-color);
-        }
-        
-        .alert-primary {
-            background-color: rgba(97, 0, 54, 0.1);
-            border-color: rgba(97, 0, 54, 0.2);
-            color: var(--primary-color);
-        }
-    </style>
+   
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark">

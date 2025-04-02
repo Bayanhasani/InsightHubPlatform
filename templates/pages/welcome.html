@@ -1,125 +1,20 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to InsightHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary-color: #610036;
-            --primary-light: #8a2a62;
-            --accent-yellow: #ffd43b;
-            --accent-blue: #4dabf7;
-        }
-        
-        /* Modern Logo Styles */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .logo-badge {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(97, 0, 54, 0.3);
-            transition: all 0.3s ease;
-            margin-right: 15px;
-        }
-        
-        .logo-badge:hover {
-            transform: rotate(15deg) scale(1.1);
-        }
-        
-        .logo-badge::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, 
-                                      rgba(255,255,255,0.8) 0%, 
-                                      rgba(255,255,255,0) 60%);
-        }
-        
-        .logo-icon {
-            font-size: 2.5rem;
-            color: white;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .logo-text {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white; /* Changed to solid white */
-            position: relative;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .logo-text::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(to right, var(--accent-yellow), var(--accent-blue));
-            border-radius: 3px;
-        }
-        
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 4rem 0;
-            margin-bottom: 3rem;
-        }
-        
-        .feature-card {
-            border: none;
-            border-radius: 10px;
-            transition: transform 0.3s;
-            height: 100%;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-    </style>
+   
 
 </head>
-<body>
+<body class="welcome-page">
     <!-- Hero Section with New Logo -->
     <section class="hero-section">
         <div class="container text-center">
@@ -214,9 +109,30 @@
         </div>
     </section>
 
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">© 2023 InsightHub. All rights reserved.</p>
+    <footer class="text-white mt-auto">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>InsightHub</h5>
+                    <p>Community for Mutah University IT students and alumni.</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'website:home' %}" class="text-white">Home</a></li>
+                        <li><a href="{% url 'post_list' %}" class="text-white">Posts</a></li>
+                        <li><a href="#" class="text-white">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect</h5>
+                    <a href="#" class="text-white me-2"><i class="bi bi-facebook" style="font-size: 1.5rem;"></i></a>
+                    <a href="#" class="text-white me-2"><i class="bi bi-twitter" style="font-size: 1.5rem;"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-linkedin" style="font-size: 1.5rem;"></i></a>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <p class="mb-0 text-center">&copy; 2025 InsightHub. All rights reserved.</p>
         </div>
     </footer>
 

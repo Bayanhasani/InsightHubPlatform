@@ -1,14 +1,76 @@
-
 {% extends "base.html" %}
-{% block title %}signup{% endblock title %}
 {% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Sign Up | InsightHub{% endblock %}
+
 {% block content %}
-<form method="post">
-{% csrf_token %}
-{{form|crispy}}
-    <button type="submit" class="btn btn-success">register</button>
-</form>
-<p>Have an account? <a href="{%  url 'login' %}">login</a></p>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header py-3 text-white" style="background-color: var(--primary-color);">
+                    <h2 class="mb-0 text-center">
+                        <i class="bi bi-person-plus me-2"></i>Create Your Account
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            {{ form|crispy }}
+                        </div>
+                        
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary py-2" style="background-color: var(--primary-color); border-color: var(--primary-color);">
+                                <i class="bi bi-person-check me-2"></i>Register Now
+                            </button>
+                        </div>
+                        
+                        <div class="text-center pt-3 border-top">
+                            <p class="mb-0">Already have an account? 
+                                <a href="{% url 'login' %}" class="text-primary-custom fw-bold">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i>Login Here
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-{% endblock content %}
+<style>
+    .card {
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+    
+    .form-control:focus {
+        border-color: var(--primary-light);
+        box-shadow: 0 0 0 0.25rem rgba(97, 0, 54, 0.1);
+    }
+    
+    .text-primary-custom {
+        color: var(--primary-color);
+    }
+    
+    .text-primary-custom:hover {
+        color: var(--primary-light);
+        text-decoration: underline;
+    }
+    
+    /* Crispy forms adjustments */
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+    
+    label {
+        font-weight: 500;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}

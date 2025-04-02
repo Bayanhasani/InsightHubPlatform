@@ -7,7 +7,7 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('verify/', views.verify_account, name='verify_account'),
-        path('verify-email/<str:token>/', views.verify_email, name='verify_email'),
+    path('verify-email/<str:token>/', views.verify_email, name='verify_email'),
 
 
     # Use Django’s built-in views for password reset

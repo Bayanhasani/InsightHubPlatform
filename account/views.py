@@ -7,8 +7,10 @@ from .forms import GraduateVerificationForm
 from django.contrib.auth import login as auth_login  # Rename to avoid conflict
 from .utils import send_verification_email
 from django.utils import timezone
-
-
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.utils.decorators import method_decorator
+from django.middleware.csrf import get_token
 # sign up view
 def signup(request):
     if request.method == 'POST':
@@ -48,6 +50,7 @@ def verify_email(request, token):
 
 
 # verification view
+@csrf_protect
 def verify_account(request):
     user_id = request.session.get('pending_user_id')  #  Get user ID from session
     if not user_id:
@@ -77,8 +80,8 @@ def verify_account(request):
     return render(request, 'registration/verify.html', {'form': form})
 
 
-
 # log in view
+@ensure_csrf_cookie  # Forces new CSRF cookie
 def user_login(request):
     if request.user.is_authenticated:
         return redirect('website:home')  # Already logged in users get redirected
