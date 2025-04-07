@@ -61,14 +61,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CSRF_COOKIE_HTTPONLY = False  # Allows JavaScript to access CSRF token
-CSRF_COOKIE_SECURE = True  # If using HTTPS
-CSRF_COOKIE_SAMESITE = 'Lax'  # Recommended for POST requests across redirects
-
-SESSION_COOKIE_AGE = 3600  # 1 hour session
-SESSION_SAVE_EVERY_REQUEST = True  # Keeps session fresh
-SESSION_COOKIE_SECURE = True  # If using HTTPS
-
 ROOT_URLCONF = 'projectFolder.urls'
 
 TEMPLATES = [

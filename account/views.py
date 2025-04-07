@@ -9,9 +9,9 @@ from .utils import send_verification_email
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import ensure_csrf_cookie
-from django.utils.decorators import method_decorator
-from django.middleware.csrf import get_token
+
 # sign up view
+@csrf_protect
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -81,7 +81,7 @@ def verify_account(request):
 
 
 # log in view
-@ensure_csrf_cookie  # Forces new CSRF cookie
+@csrf_protect
 def user_login(request):
     if request.user.is_authenticated:
         return redirect('website:home')  # Already logged in users get redirected

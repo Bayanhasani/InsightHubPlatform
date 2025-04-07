@@ -1,6 +1,7 @@
 from django import forms
 from .models import Verification
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 
 User = get_user_model()  # Get the custom user model
 class SignupForm(forms.ModelForm):
@@ -39,11 +40,35 @@ class SignupForm(forms.ModelForm):
 
 
 class GraduateVerificationForm(forms.ModelForm):
+    certificate = forms.FileField(
+        label="Graduation Certificate",
+        required=True,
+        widget=forms.ClearableFileInput(attrs={'accept': '.pdf,.jpg,.png'})
+    )
+    
     class Meta:
         model = Verification
         fields = ['certificate']
 
+    def clean_certificate(self):
+        certificate = self.cleaned_data.get('certificate')
+        if not certificate:
+            raise ValidationError("Graduation certificate is required")
+        return certificate
+
 class CompanyVerificationForm(forms.ModelForm):
+    request_message = forms.CharField(
+        label="Verification Request Details",
+        required=True,
+        widget=forms.Textarea(attrs={'rows': 4}),
+        help_text="Please explain your connection to the university"
+    )
     class Meta:
         model = Verification
         fields = ['request_message']
+
+    def clean_request_message(self):
+        message = self.cleaned_data.get('request_message')
+        if not message or len(message.strip()) < 50:
+            raise ValidationError("Please provide at least 50 characters of explanation")
+        return message.strip()
