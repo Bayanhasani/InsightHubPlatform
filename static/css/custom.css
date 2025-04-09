@@ -1,0 +1,285 @@
+/* static/css/custom.css */
+:root {
+    --primary-color: #610036;
+    --primary-light: #8a2a62;
+    --accent-yellow: #ffd43b;
+    --accent-blue: #4dabf7;
+  }
+  
+  /* Base Styles (from base.html) */
+  body {
+    background-color: #f8f9fa;
+  }
+  
+  /* Logo Styles (combined from welcome.html and base.html) */
+  .logo-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  /* Welcome page specific logo */
+  .welcome-page .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .logo-badge {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(97, 0, 54, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  /* Welcome page specific logo badge */
+  .welcome-page .logo-badge {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+    box-shadow: 0 4px 15px rgba(97, 0, 54, 0.3);
+  }
+  
+  .logo-badge:hover {
+    transform: rotate(15deg) scale(1.1);
+  }
+  
+  .logo-badge::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, 
+                rgba(255,255,255,0.8) 0%, 
+                rgba(255,255,255,0) 60%);
+  }
+  
+  .logo-icon {
+    font-size: 1.5rem;
+    color: white;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Welcome page specific logo icon */
+  .welcome-page .logo-icon {
+    font-size: 2.5rem;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    position: relative;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  
+  /* Welcome page specific logo text */
+  .welcome-page .logo-text {
+    font-size: 2.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  .logo-text::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent-yellow), var(--accent-blue));
+    border-radius: 2px;
+  }
+  
+  /* Welcome page specific underline */
+  .welcome-page .logo-text::after {
+    bottom: -5px;
+    height: 3px;
+    border-radius: 3px;
+  }
+  
+  /* Welcome page sections */
+  .hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 4rem 0;
+    margin-bottom: 3rem;
+  }
+  .feature-card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+  /* Navbar */
+  .navbar {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .nav-link {
+    font-weight: 500;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+  }
+  
+  .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  /* Cards */
+  .post-card {
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  
+  /* Specific card styles for different pages */
+  .list-page .post-card,
+  .index-page .post-card {
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .list-page .post-card:hover,
+  .index-page .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(97, 0, 54, 0.1);
+    border-color: rgba(97, 0, 54, 0.1);
+  }
+  
+  /* Badges */
+  .job-badge {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .question-badge {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  /* Form page styles */
+  .form-page .card {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .form-page .card-header {
+    border-radius: 0 !important;
+  }
+  
+  .form-page select.form-control, 
+  .form-page textarea.form-control,
+  .form-page input.form-control {
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+  }
+  
+  .form-page select.form-control:focus, 
+  .form-page textarea.form-control:focus,
+  .form-page input.form-control:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 0.25rem rgba(97, 0, 54, 0.1);
+  }
+  
+  /* Footer */
+  footer {
+    background-color: var(--primary-color);
+    padding: 2rem 0;
+  }
+  
+  /* Utility classes */
+  .feature-icon {
+    color: var(--primary-color);
+  }
+  
+  .alert-primary {
+    background-color: rgba(97, 0, 54, 0.1);
+    border-color: rgba(97, 0, 54, 0.2);
+    color: var(--primary-color);
+  }
+  
+  /* Index page specific styles */
+  .index-page .post-prompt {
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #dee2e6 !important;
+    transition: all 0.2s;
+  }
+  
+  .index-page .post-prompt:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .index-page .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .index-page .page-link {
+    color: var(--primary-color);
+  }
+  
+  .index-page .card-header {
+    background-color: white !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }

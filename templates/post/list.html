@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Community Posts | InsightHub{% endblock %}
+
+{% block content %}
+<body class="list-page">
+<div class="d-flex justify-content-between align-items-center mb-4">
+    {% if user.is_authenticated %}
+    <a href="{% url 'post_create' %}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> New Post
+    </a>
+    {% endif %}
+</div>
+<div class="mb-4">
+    <div class="row g-3">
+        <div class="col-md-8">
+            <!-- Search Form -->
+            <form method="get" class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search jobs, posts..." 
+                       value="{{ search_query }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <!-- Filter by Post Type -->
+            <form method="get" class="input-group">
+                <select name="type" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Types</option>
+                    <option value="job" {% if selected_type == 'job' %}selected{% endif %}>Jobs</option>
+                    <option value="question" {% if selected_type == 'question' %}selected{% endif %}>Questions</option>
+                    <option value="post" {% if selected_type == 'general' %}selected{% endif %}>General Posts</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    {% for post in posts %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card post-card h-100 border-0">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top" alt="Post image" style="height: 200px; object-fit: cover; border-radius: 0.375rem 0.375rem 0 0;">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <span class="badge rounded-pill {% if post.post_type == 'job' %}job-badge{% elif post.post_type == 'question' %}question-badge{% else %}bg-secondary{% endif %}">
+                        <i class="bi {% if post.post_type == 'job' %}bi-briefcase{% elif post.post_type == 'question' %}bi-question-circle{% else %}bi-postcard{% endif %} me-1"></i>
+                        {{ post.get_post_type_display }}
+                    </span>
+                    <small class="text-muted">{{ post.created_at|timesince }} ago</small>
+                </div>
+                
+                <h5 class="card-title">
+                    {% if post.post_type == 'job' %}
+                        {{ post.job_title }} at {{ post.job_company }}
+                    {% else %}
+                        {{ post.content|truncatechars:50 }}
+                    {% endif %}
+                </h5>
+                
+                {% if post.post_type == 'job' %}
+                <p class="card-text text-muted">
+                    <i class="bi bi-geo-alt-fill me-1"></i> {{ post.job_location }}
+                </p>
+                {% endif %}
+                
+                <div class="mt-auto pt-2">
+                    <a href="{% url 'post_detail' post.pk %}" class="btn btn-sm w-100" 
+                       style="background-color: var(--primary-light); color: white; border: none;">
+                        View Details <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-person-circle me-2 text-muted"></i>
+                    <small class="text-muted">
+                        {{ post.author.username }}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No posts found matching your criteria.
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+{% endblock %}

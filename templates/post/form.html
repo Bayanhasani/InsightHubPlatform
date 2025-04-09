@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %}{% if form.instance.pk %}Edit{% else %}Create{% endif %} Post | InsightHub{% endblock %}
+
+{% block content %}
+<body class="form-page">
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header py-3" style="background-color: var(--primary-color);">
+                <h3 class="mb-0 text-white">
+                    <i class="bi bi-{% if form.instance.pk %}pen-fill{% else %}plus-circle{% endif %} me-2"></i>
+                    {% if form.instance.pk %}Edit Post{% else %}Create New Post{% endif %}
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.post_type.id_for_label }}" class="form-label fw-bold">Post Type</label>
+                        {{ form.post_type }}
+                        <div class="invalid-feedback">
+                            Please select a post type.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.content.id_for_label }}" class="form-label fw-bold">Content</label>
+                        {{ form.content }}
+                        <div class="invalid-feedback">
+                            Please provide post content.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.image.id_for_label }}" class="form-label fw-bold">Image (Optional)</label>
+                        <div class="file-upload-wrapper">
+                            {{ form.image }}
+                        </div>
+                        <small class="text-muted">Maximum size: 5MB. Supported formats: JPG, PNG.</small>
+                    </div>
+                    
+                    <!-- Job Fields Section -->
+                    <div id="job-fields" class="border p-4 mb-4 bg-light rounded" style="display: none; background-color: rgba(97, 0, 54, 0.05) !important;">
+                        <h5 class="form-label fw-bold"><i class="bi bi-briefcase me-2"></i> Job Details</h5>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.job_title.id_for_label }}" class="form-label fw-bold">Job Title</label>
+                            {{ form.job_title }}
+                            <div class="invalid-feedback">
+                                Please provide a job title.
+                            </div>
+                        </div>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.job_company.id_for_label }}" class="form-label fw-bold">Company</label>
+                                {{ form.job_company }}
+                                <div class="invalid-feedback">
+                                    Please provide company name.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.job_location.id_for_label }}" class="form-label fw-bold">Location</label>
+                                {{ form.job_location }}
+                                <div class="invalid-feedback">
+                                    Please provide job location.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+                        <a href="{% if form.instance.pk %}{% url 'post_detail' form.instance.pk %}{% else %}{% url 'post_list' %}{% endif %}" 
+                           class="btn btn-outline-secondary px-4">
+                            <i class="bi bi-x-circle me-2"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn px-4" style="background-color: var(--primary-color); color: white;">
+                            <i class="bi bi-check-circle me-2"></i> {% if form.instance.pk %}Update{% else %}Create{% endif %} Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+// Show/hide job fields based on post type
+document.getElementById('id_post_type').addEventListener('change', function() {
+    const jobFields = document.getElementById('job-fields');
+    jobFields.style.display = this.value === 'job' ? 'block' : 'none';
+    
+    // Toggle required attribute
+    const jobInputs = jobFields.querySelectorAll('input');
+    jobInputs.forEach(input => {
+        input.required = this.value === 'job';
+    });
+});
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const postType = document.getElementById('id_post_type').value;
+    const jobFields = document.getElementById('job-fields');
+    jobFields.style.display = postType === 'job' ? 'block' : 'none';
+    
+    // Form validation
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+    
+    // Style file input
+    const fileInput = document.querySelector('input[type="file"]');
+    if (fileInput) {
+        fileInput.classList.add('form-control');
+    }
+});
+</script>
+
+{% endblock %}
+</body>
+{% endblock %}
