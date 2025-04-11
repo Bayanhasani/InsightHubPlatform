@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import CustomUser, Verification
+from .models import CustomUser, Verification,Profile
+
+
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = True  # Allow deletion from admin
+    extra = 0
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
@@ -38,3 +44,22 @@ class VerificationAdmin(admin.ModelAdmin):
             verification.status = 'rejected'
             verification.save()
         self.message_user(request, f"Rejected {queryset.count()} verifications")
+
+
+# Profile Admin
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'display_user_type', 'short_bio')
+    list_select_related = ('user',)
+    search_fields = ('user__username', 'user__email')
+    list_filter = ('user__user_type',)
+    
+    def display_user_type(self, obj):
+        return obj.user.get_user_type_display()
+    display_user_type.short_description = 'User Type'
+    
+    def short_bio(self, obj):
+        return obj.bio[:50] + '...' if obj.bio else ''
+    short_bio.short_description = 'Bio Snippet'
+
+

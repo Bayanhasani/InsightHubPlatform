@@ -132,7 +132,7 @@
                         </div>
                         {% endif %}
 
-                        <p class="card-text">{{ post.content|linebreaksbr }}</p>
+                        <p class="card-text">{{ post.content|urlize|linebreaks }}</p>
 
                         {% if post.image %}
                         <div class="mt-3">

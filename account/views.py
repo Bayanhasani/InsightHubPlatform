@@ -1,14 +1,16 @@
-from django.shortcuts import render,redirect
-from .forms import SignupForm,GraduateVerificationForm,CompanyVerificationForm
-from django.contrib.auth import login,logout,authenticate
+from django.shortcuts import render,redirect,get_object_or_404
+from .forms import SignupForm,GraduateVerificationForm,CompanyVerificationForm,ProfileForm
+from django.contrib.auth import login,logout,authenticate,get_user_model
 from django.contrib import messages
-from .models import CustomUser 
+from .models import CustomUser ,Profile
 from .forms import GraduateVerificationForm
 from django.contrib.auth import login as auth_login  # Rename to avoid conflict
 from .utils import send_verification_email
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.auth.decorators import login_required
+from django_countries import countries
+
 
 # sign up view
 @csrf_protect
@@ -111,3 +113,40 @@ def user_logout(request):
     logout(request)
     return redirect('login')  # Redirect to login page after logout
 
+
+
+# users profile 
+
+def view_profile(request, username):
+    # Get profile or return 404
+    profile = get_object_or_404(Profile, user__username=username)
+    User = get_user_model()
+    user = get_object_or_404(User, username=username)
+    profile, created = Profile.objects.get_or_create(user=user)
+    # Prepare context with profile data
+    context = {
+        'profile': profile,
+        'fields': profile.get_display_fields(),
+        'is_owner': request.user == profile.user
+    }
+    return render(request, 'profiles/view.html', context)
+
+@login_required
+def edit_profile(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully!")
+            return redirect('view_profile', username=request.user.username)
+    else:
+        form = ProfileForm(instance=profile)
+    
+    return render(request, 'profiles/edit.html', {'form': form,'profile':profile})
+
+
+@login_required
+def redirect_to_profile(request):
+    return redirect('view_profile', username=request.user.username)

@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     'account',
     'notfication',
     'post',
-    'company',
     'crispy_forms',
     'crispy_bootstrap5',
+    'phonenumber_field',
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -155,3 +155,6 @@ EMAIL_PORT = 465    # for sll
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'alhasanibayan12@gmail.com'
 EMAIL_HOST_PASSWORD = 'lgrv rzja onni lhbf'
+
+
+LOGIN_REDIRECT_URL = '/home/'
